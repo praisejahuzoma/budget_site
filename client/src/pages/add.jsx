@@ -125,6 +125,140 @@ const Add = () => {
 
   
 
+  return (
+    <div className="container">
+      <h1>BudgetBuddy</h1>
+      <h3>YOUR DIGITAL MARKET LIST</h3>
 
+      <div className="details-container">
+        <div className="headings">
+          <h4>Total Budget</h4>
+          <h4>Expenses</h4>
+          <h4>Balance</h4>
+        </div>
+        <div className="details">
+          <input
+            className="input"
+            type="number"
+            value={totalBudget}
+            onChange={handleBudgetChange}
+            style={{ marginRight: "10px" }}
+          />
+          <p id="expenses">{currencySymbol + calculateTotal().toFixed(2)}</p>
+          <p>
+            {" "}
+            {currencySymbol}
+            {totalBudget - calculateTotal()}
+          </p>
+        </div>
+      </div>
+
+      <div className="list-container">
+        <div className="list-heading">
+          <i
+            className="bx bxs-cart bx-tada"
+            id="cart_icon"
+            style={{ color: "#512D38" }}
+          ></i>
+          <h4>Item</h4>
+          <h4>Description</h4>
+          <h4>Quantity</h4>
+          <h4>Unit Price</h4>
+          <h4>Amount</h4>
+        </div>
+
+        <ul className="list-items">
+          {marketList.map((item) => (
+            <li key={item.id} className="list-item">
+              <i
+                onClick={() => handleDeleteItem(item.id)}
+                className="bx bx-message-square-x checkbox"
+                style={{ color: "#B27092" }}
+              ></i>
+              <p>{item.name}</p>
+              <p>{item.description}</p>
+              <p>{item.quantity}</p>
+              <p>
+                {currencySymbol}
+                {Number(item.price).toFixed(2)}
+              </p>
+              <p>
+                {currencySymbol}
+                {Number(item.amount).toFixed(2)}
+              </p>
+            </li>
+          ))}
+        </ul>
+
+        <div className="currency-section">
+          <h2 className="total">
+            Total:{" "}
+            <span>
+              {currencySymbol}
+              {calculateTotal().toFixed(2)}
+            </span>
+          </h2>
+          <div className="currency-selector">
+            <label htmlFor="currency-selector" className="currency_style">
+              Select Currency:
+            </label>
+            <select
+              id="currency-selector"
+              className="currency"
+              value={currency}
+              onChange={handleCurrencyChange}
+            >
+              <option value="NGN">₦ Naira</option>
+              <option value="USD">$ Dollar</option>
+              <option value="EUR">€ Euro</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div className="list-input">
+        <input
+          className="item-input"
+          type="text"
+          placeholder="Enter Item"
+          value={item}
+          onChange={(e) => setItem(e.target.value)}
+        />
+        <input
+          className="description-input"
+          type="text"
+          placeholder="Enter Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+        <input
+          className="qty-input"
+          type="number"
+          placeholder="Quantity"
+          value={quantity}
+          onChange={(e) => setQuantity(e.target.value)}
+        />
+        <input
+          className="price-input"
+          type="number"
+          placeholder="Unit Price"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+        />
+        <input
+          className="amount-input"
+          type="text"
+          placeholder="Amount"
+          value={productTotal > 0 ? productTotal.toFixed(2) : ""}
+          readOnly
+        />
+
+        <button className="button" onClick={handleAddItem}>
+          Add Item
+        </button>
+      </div>
+    </div>
+  );
+};
 
 export default Add;
