@@ -1,0 +1,302 @@
+@import url('https://fonts.googleapis.com/css2?family=Boogaloo&family=Dosis:wght@200&family=Roboto&display=swap');
+
+body{
+    background: #F1E4E8;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.list-container {
+    width: 100%;
+    max-width: 48rem;
+    margin: 0 auto;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px -7px rgba(0, 0, 0, 0.25);
+    border-radius: 0.375rem;
+    padding: 3rem;
+}
+
+.list-heading, .list-item {
+    display: flex;
+    font-family: "Roboto", sans-serif;
+    color: #000000;
+    font-size: 0.80rem;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.button {
+    width: 7.688rem;
+    height: 2.063rem;
+    font-weight: 37.5rem;
+    font-size: 1rem;
+    line-height: 1.106rem;
+    color: #d5b5cc;
+    font-style: normal;
+    background-color: #4c2525;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+h1{
+    font-family: 'Boogaloo', cursive;
+    font-size: 4rem;
+    font-weight: 400;
+    line-height: 4.756rem;
+    top: 2.938rem;
+}
+
+h3 {
+    font-family: 'Dosis', sans-serif;
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 1.896rem;
+    text-align: center;
+    margin-top: -2.5rem;
+    font-style: normal;
+
+}
+#cart_icon{
+    position: relative;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: black;
+}
+.list-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 2.813rem;
+    width: 53.688rem;
+    height: 2.063rem;
+    justify-content: space-around;
+}
+
+.item-input {
+    width: 11.063rem;
+    height: 2.063rem;
+    background: #FFFFFF;
+    border: 0.188rem solid #E2DCDE;
+    box-sizing: border-box;
+    border-radius: 0.25rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 0.75rem;
+    line-height: 0.879rem;
+    color: #AAAAAA;
+    padding: 0.438rem;
+
+}
+.item-input:focus-visible {
+    outline-offset: 0px;
+    outline: none;
+}
+
+.description-input {
+    width: 13.75rem;
+    height: 2.063rem;
+    background: #FFFFFF;
+    border: 0.188rem solid #E2DCDE;
+    box-sizing: border-box;
+    border-radius: 0.25rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 0.75rem;
+    line-height: 0.879rem;
+    color: #AAAAAA;
+    padding: 0.438rem;
+
+}
+
+.description-input:focus-visible {
+    outline-offset: 0px;
+    outline: none;
+}
+
+.qty-input {
+    width: 4.375rem;
+    height: 2.063rem;
+    background: #FFFFFF;
+    border: 0.188rem solid #E2DCDE;
+    box-sizing: border-box;
+    border-radius: 0.25rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 0.75rem;
+    line-height: 0.879rem;
+    color: #AAAAAA;
+    padding: 0.438rem;
+}
+
+.qty-input:focus-visible {
+    outline-offset: 0px;
+    outline: none;
+}
+
+.icon {
+    margin-left: -1.875rem;
+    color: #AAAAAA;
+    font-size: 0.875rem;
+    margin-top: 0.188rem;
+}
+
+.down-icon {
+    margin-left: -1.438rem;
+    margin-top: 0.879rem;
+    color: #AAAAAA;
+    font-size: 0.875rem;
+}
+
+.price-input {
+    width: 5rem;
+    height: 2.063rem;
+    background: #FFFFFF;
+    border: 0.188rem solid #E2DCDE;
+    box-sizing: border-box;
+    border-radius: 0.25rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 0.75rem;
+    line-height: 0.879rem;
+    color: #AAAAAA;
+    padding: 0.438rem;
+}
+
+.price-input:focus-visible {
+    outline-offset: 0px;
+    outline: none;
+}
+.amount-input{
+      width: 5rem;
+    height: 2.063rem;
+    background: #FFFFFF;
+    border: 0.188rem solid #E2DCDE;
+    box-sizing: border-box;
+    border-radius: 0.25rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 0.75rem;
+    line-height: 0.879rem;
+    color: #AAAAAA;
+    padding: 0.438rem;
+}
+
+.amount-input:focus-visible {
+    outline-offset: 0px;
+    outline: none;
+}
+
+.list-heading  {
+  display: grid;
+  grid-template-columns: 80px 1fr 1fr 1fr 1fr 1fr;
+  gap: 38px;
+  align-items: center;
+  padding: 10px;
+
+}
+
+.list-heading  {
+  margin: 0;
+  text-align: left;
+}
+
+.list-items {
+  list-style: none;
+  padding: 0;
+}
+
+.list-item {
+  display: grid;
+  grid-template-columns: 80px 1fr 1fr 1fr 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  padding: 10px;
+}
+
+.list-item p {
+  margin: 0;
+}
+
+.list-item i {
+  font-size: 20px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+
+/* Add space around the icon and button */
+#cart_icon {
+  margin-right: 20px; /* Adds space between the cart icon and the heading text */
+}
+
+.list-item i {
+  margin-right: 20px; /* Adds space between the delete button and the item data */
+}
+
+.total{
+    margin-right: 3rem;
+    margin-top: 2.125rem;
+    font-family: "Roboto", san-serif;
+    color: #AAAAAA;
+    text-align: right;
+}
+
+.total span {
+    color: #000000;
+    font-family: "Roboto", san-serif;
+    margin-left: 0.563rem;
+    color: #B97375;
+    font-size: 2rem;
+}
+/* Add additional styles as needed */
+
+.details-container {
+ background-color:#CEB1BE;
+ color: white;
+ margin-bottom: 30px;
+ padding: 20px;
+ border-radius: 10px;
+
+}
+
+
+.headings, .details {
+  display: grid;
+  grid-template-columns: 80px 1fr 1fr;
+  gap: 100px;
+  text-align: left;
+  padding: 10px;
+
+}
+
+.headings h4, .details p {
+  margin: 0; /* Ensure no extra margin */
+}
+
+.input{
+    
+  border: 2px solid #F1E4E8; /* Border color and thickness */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 16px; /* Font size */
+  color: #9a4c4c; /* Text color */
+  box-sizing: border-box;
+}
+.currency_style{
+    color: #c08ca3;
+    font-size: 19px;
+}
+.currency{
+    color: #ab8297;
+    font-size: 18px;
+     border:none;
+
+}
