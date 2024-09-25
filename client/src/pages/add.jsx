@@ -88,6 +88,43 @@ const Add = () => {
     }
   };
 
+  const resetInputFields = () => {
+    setItem("");
+    setDescription("");
+    setQuantity("");
+    setPrice("");
+  };
+
+  const calculateTotal = () => {
+    return marketList.reduce((total, item) => total + item.amount, 0);
+  };
+
+  const getCurrencySymbol = (currencyCode) => {
+    switch (currencyCode) {
+      case "NGN":
+        return "₦";
+      case "USD":
+        return "$";
+      case "EUR":
+        return "€";
+      default:
+        return "₦";
+    }
+  };
+
+  const handleCurrencyChange = (e) => {
+    const selectedCurrency = e.target.value;
+    setCurrency(selectedCurrency);
+    setCurrencySymbol(getCurrencySymbol(selectedCurrency));
+    localStorage.setItem("selectedCurrency", selectedCurrency);
+  };
+
+  const handleBudgetChange = (e) => {
+    setTotalBudget(e.target.value);
+  };
+
   
+
+
 
 export default Add;
