@@ -1,3 +1,4 @@
+@import url("https://api.fontshare.com/v2/css?f[]=striper@400&f[]=boska@300,400&f[]=tanker@400&f[]=epilogue@200&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Boogaloo&family=Dosis:wght@200&family=Roboto&display=swap');
 
 body{
@@ -12,7 +13,7 @@ body{
 
 .list-container {
     width: 100%;
-    max-width: 48rem;
+    max-width: 40rem;
     margin: 0 auto;
     background: #FFFFFF;
     box-shadow: 0px 0px 10px -7px rgba(0, 0, 0, 0.25);
@@ -43,17 +44,18 @@ body{
     cursor: pointer;
 }
 h1{
-    font-family: 'Boogaloo', cursive;
+   font-family: 'Boogaloo', cursive;
     font-size: 4rem;
     font-weight: 400;
     line-height: 4.756rem;
     top: 2.938rem;
+    color: #4c2525;
 }
 
 h3 {
     font-family: 'Dosis', sans-serif;
     font-weight: 400;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     line-height: 1.896rem;
     text-align: center;
     margin-top: -2.5rem;
@@ -83,7 +85,7 @@ h3 {
     border: 0.188rem solid #E2DCDE;
     box-sizing: border-box;
     border-radius: 0.25rem;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Epilogue', sans-serif;
     font-weight: 400;
     font-style: normal;
     font-size: 0.75rem;
@@ -104,7 +106,7 @@ h3 {
     border: 0.188rem solid #E2DCDE;
     box-sizing: border-box;
     border-radius: 0.25rem;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Epilogue', sans-serif;
     font-weight: 400;
     font-style: normal;
     font-size: 0.75rem;
@@ -120,13 +122,13 @@ h3 {
 }
 
 .qty-input {
-    width: 4.375rem;
+    width: 5.2rem;
     height: 2.063rem;
     background: #FFFFFF;
     border: 0.188rem solid #E2DCDE;
     box-sizing: border-box;
     border-radius: 0.25rem;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Epilogue', sans-serif;
     font-weight: 400;
     font-style: normal;
     font-size: 0.75rem;
@@ -155,13 +157,13 @@ h3 {
 }
 
 .price-input {
-    width: 5rem;
+    width: 5.7rem;
     height: 2.063rem;
     background: #FFFFFF;
     border: 0.188rem solid #E2DCDE;
     box-sizing: border-box;
     border-radius: 0.25rem;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Epilogue', sans-serif;
     font-weight: 400;
     font-style: normal;
     font-size: 0.75rem;
@@ -181,7 +183,7 @@ h3 {
     border: 0.188rem solid #E2DCDE;
     box-sizing: border-box;
     border-radius: 0.25rem;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Epilogue', sans-serif;
     font-weight: 400;
     font-style: normal;
     font-size: 0.75rem;
@@ -245,14 +247,14 @@ h3 {
 .total{
     margin-right: 3rem;
     margin-top: 2.125rem;
-    font-family: "Roboto", san-serif;
+    font-family: 'Epilogue', sans-serif;
     color: #AAAAAA;
     text-align: right;
 }
 
 .total span {
     color: #000000;
-    font-family: "Roboto", san-serif;
+   font-family: 'Dosis', sans-serif;
     margin-left: 0.563rem;
     color: #B97375;
     font-size: 2rem;
@@ -299,4 +301,182 @@ h3 {
     font-size: 18px;
      border:none;
 
+}
+
+
+
+/* Media queries for responsiveness */
+
+@media screen and (max-width: 768px) {
+
+.list-contanier {
+        width: 1%;
+        height: 2px;
+    }
+    .list-heading {
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        margin-top: 15px;
+        font-size: 0.9rem;
+    }
+
+    .list-item {
+        flex-wrap: wrap;
+        margin-top: 10px;
+        font-size: 0.9rem;
+    }
+
+    .item,
+    .desc,
+    .qty,
+    .price,
+    .amount {
+        margin-left: 0;
+        width: auto;
+        padding: 10px;
+    }
+
+    .total {
+        margin-top: 15px;
+        font-size: 1rem;
+    }
+
+    .currency-selector {
+        margin-top: 10px;
+        font-size: 1rem;
+    }
+
+    .button {
+        width: 100%;
+        margin-top: 15px;
+        font-size: 1rem;
+    }
+
+    .copyRight {
+        margin-top: 15px;
+        font-size: 0.9rem;
+    }
+
+
+    .list-item {
+        flex-wrap: wrap;
+        margin-top: 10px;
+        font-size: 0.9rem;
+        flex-direction: row;
+        font-family: "Roboto", san-serif;
+        font-size: 0.75rem;
+    }
+
+    .list-item>div {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .list-item .item,
+    .list-item .desc,
+    .list-item .qty,
+    .list-item .price,
+    .list-item .amount {
+        margin-left: 50px;
+        justify-content: space-around;
+    }
+
+    .list-item .item {
+        margin-left: 50px;
+        width: 50px;
+    }
+
+    .list-item .desc {
+        margin-left: 35px;
+        width: 40px;
+    }
+
+    .qty {
+        margin-left: 65px;
+        width: 20px;
+    }
+
+    .list-item .price {
+        margin-left: 75px;
+        width: 10px;
+    }
+
+    .list-item .amount {
+        margin-left: 98px;
+        width: 10px;
+
+    }
+
+    .list-item .desc {
+        width: 5rem;
+    }
+
+    .list-input {
+        flex-direction: row;
+        align-items: center;
+        width: 90%;
+        margin-top: 20px;
+        justify-content: space-between;
+    }
+
+    .item-input,
+    .description-input,
+    .qty-input,
+    .price-input,
+    .amount-input {
+        width: 100%;
+        margin-bottom: 10px;
+        justify-content: space-around;
+        padding: 0.313rem;
+        flex-wrap: wrap;
+    }
+
+    .button {
+        font-size: 10px;
+        margin-bottom: 23px;
+        justify-content: space-around;
+    }
+
+    input {
+        margin-left: 5px;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+
+  .list-container{
+    
+    padding: 15px;
+    width: 90%;
+    
+  }
+ .list-item {
+  display: grid;
+  grid-template-columns: 40px 1fr 1fr 1fr 1fr 1fr;
+  gap: 15px;
+  align-items: center;
+  padding: 10px;
+ 
+}
+.list-heading{
+     display: grid;
+  grid-template-columns: 40px 1fr 1fr 1fr 1fr 1fr;
+  gap: 15px;
+  align-items: center;
+  padding: 10px;
+  
+}
+.button{
+    margin-left: 10px;
+}
+}
+
+@media screen and (min-width: 768px) {
+.list-input{
+    width: 760px;
+}
+.button{
+    margin-left: 10px;
+}
 }

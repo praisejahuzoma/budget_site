@@ -1,90 +1,86 @@
 import express from "express";
+import { drizzle } from "drizzle-orm/mysql2";
+import { int, varchar, mysqlTable } from "drizzle-orm/mysql-core";
 import mysql from "mysql2/promise";
 import cors from "cors";
 
 const app = express();
 
-// Middleware
-app.use(cors());
-app.use(express.json());
-
 // Create an asynchronous connection to MySQL
-const createConnection = async () => {
-  try {
-    const connection = await mysql.createConnection({
-      host: "localhost",
-      user: "Praisejah",
-      password: "password",
-      database: "budget_db",
-    });
+const connection = await mysql.createConnection({
+  host: "localhost",
+  user: "Praisejah",
+  password: "password",
+  database: "budget_db",
+});
 
-    console.log("Connected to MySQL as ID:", connection.threadId);
-    return connection;
-  } catch (err) {
-    console.error("Error connecting to MySQL:", err);
-    throw err;
-  }
-};
+// Initialize Drizzle ORM with the connection
+const db = drizzle(connection);
+
+// Schema definition
+const items = mysqlTable("items", {
+  id: int("id").primaryKey().autoincrement().notNull(),
+  name: varchar("name", { length: 45 }).notNull(),
+  price: int("price").notNull(),
+  description: varchar("description", { length: 225 }),
+  price: int("quantity").notNull(),
+});
+
+app.use(express.json());
+app.use(cors());
 
 // Route to check the backend
 app.get("/", (req, res) => {
   res.json("This is the backend");
 });
 
-// Get all items from MySQL
+// Get all books
 app.get("/items", async (req, res) => {
   try {
-    const connection = await createConnection();
-    const [rows] = await connection.execute("SELECT * FROM items");
-    res.json(rows);
-    await connection.end(); // Close the connection after query
-  } catch (err) {
-    console.error("Error fetching items:", err);
-    res.status(500).json({ message: "Error fetching items", error: err });
+    const result = await db.select().from(items);
+    if (!Array.isArray(result)) {
+      return res.status(500).json({ error: "Unexpected data format" });
+    }
+    return res.json(result);
+  } catch (error) {
+    res.status(500).json(error);
   }
 });
 
-// Add a new item
+// Create a book
 app.post("/items", async (req, res) => {
-  const { name, price, description, quantity } = req.body;
-  console.log("Received request to add item:", {
-    name,
-    price,
-    description,
-    quantity,
-  }); // Debugging line
-
   try {
-    const connection = await createConnection();
-    const [result] = await connection.execute(
-      "INSERT INTO items (name, price, description, quantity) VALUES (?, ?, ?, ?)",
-      [name, price, description, quantity]
-    );
-    res.json({ message: "Item created", id: result.insertId });
-    await connection.end(); // Close the connection after query
-  } catch (err) {
-    console.error("Error creating item:", err); // Debugging line
-    res.status(500).json({ message: "Error creating item", error: err });
+    await db
+      .insert(items)
+      .values({
+        name: req.body.name,
+        price: req.body.price,
+        description: req.body.description,
+        quantity: req.body.quantity,
+      })
+      .$returningId();
+    return res.json("items has been created successfully");
+  } catch (error) {
+    res.status(500).json(error);
   }
 });
 
-// Delete an item
+// Delete a book by id
 app.delete("/items/:id", async (req, res) => {
-  const { id } = req.params;
-
+  const itemId = req.params.id;
   try {
-    const connection = await createConnection();
-    await connection.execute("DELETE FROM items WHERE id = ?", [id]);
-    res.json({ message: "Item deleted" });
-    await connection.end();
-  } catch (err) {
-    console.error("Error deleting item:", err);
-    res.status(500).json({ message: "Error deleting item", error: err });
+    await db.delete(items).where(eq(items.id, itemId));
+    return res.json("items has been deleted successfully");
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
   }
 });
+
+
 
 // Start the server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
