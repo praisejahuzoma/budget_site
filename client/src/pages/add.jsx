@@ -132,7 +132,7 @@ const Add = () => {
 
       <div className="details-container">
         <div className="headings">
-          <h4>Total Budget</h4>
+          <h4>TotalBudget</h4>
           <h4>Expenses</h4>
           <h4>Balance</h4>
         </div>
