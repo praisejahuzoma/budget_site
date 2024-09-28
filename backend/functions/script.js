@@ -3,19 +3,11 @@ import { drizzle } from "drizzle-orm/mysql2";
 import { int, varchar, mysqlTable } from "drizzle-orm/mysql-core";
 import mysql from "mysql2/promise";
 import cors from "cors";
+import ServerlessHttp from "serverless-http";
 
 const app = express();
-
-// Create an asynchronous connection to MySQL
-const connection = await mysql.createConnection({
-  host: "localhost",
-  user: "Praisejah",
-  password: "password",
-  database: "budget_db",
-});
-
-// Initialize Drizzle ORM with the connection
-const db = drizzle(connection);
+app.use(express.json());
+app.use(cors());
 
 // Schema definition
 const items = mysqlTable("items", {
@@ -23,33 +15,42 @@ const items = mysqlTable("items", {
   name: varchar("name", { length: 45 }).notNull(),
   price: int("price").notNull(),
   description: varchar("description", { length: 225 }),
-  price: int("quantity").notNull(),
+  quantity: int("quantity").notNull(), // Corrected this line
 });
 
-app.use(express.json());
-app.use(cors());
+// Connect to MySQL within the route handlers
+async function getConnection() {
+  return mysql.createConnection({
+    host: "localhost",
+    user: "Praisejah",
+    password: "password",
+    database: "budget_db",
+  });
+}
 
 // Route to check the backend
 app.get("/", (req, res) => {
   res.json("This is the backend");
 });
 
-// Get all books
+// Get all items
 app.get("/items", async (req, res) => {
   try {
+    const connection = await getConnection();
+    const db = drizzle(connection);
     const result = await db.select().from(items);
-    if (!Array.isArray(result)) {
-      return res.status(500).json({ error: "Unexpected data format" });
-    }
+    await connection.end(); // Close connection after use
     return res.json(result);
   } catch (error) {
     res.status(500).json(error);
   }
 });
 
-// Create a book
+// Create an item
 app.post("/items", async (req, res) => {
   try {
+    const connection = await getConnection();
+    const db = drizzle(connection);
     await db
       .insert(items)
       .values({
@@ -59,28 +60,26 @@ app.post("/items", async (req, res) => {
         quantity: req.body.quantity,
       })
       .$returningId();
-    return res.json("items has been created successfully");
+    await connection.end(); // Close connection after use
+    return res.json("Item has been created successfully");
   } catch (error) {
     res.status(500).json(error);
   }
 });
 
-// Delete a book by id
+// Delete an item by id
 app.delete("/items/:id", async (req, res) => {
   const itemId = req.params.id;
   try {
+    const connection = await getConnection();
+    const db = drizzle(connection);
     await db.delete(items).where(eq(items.id, itemId));
-    return res.json("items has been deleted successfully");
+    await connection.end(); // Close connection after use
+    return res.json("Item has been deleted successfully");
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
   }
 });
 
-
-
-// Start the server
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+module.exports.handler = ServerlessHttp(app);
