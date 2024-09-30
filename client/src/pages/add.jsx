@@ -79,9 +79,12 @@ const Add = () => {
 
   const handleDeleteItem = async (id) => {
     try {
-      await fetch(`${API_URL}/${id}`, {
+      const response = await fetch(`${API_URL}/${id}`, {
         method: "DELETE",
       });
+      if (!response.ok) {
+        throw new Error(`Error deleting item: ${response.statusText}`);
+      }
       setMarketList(marketList.filter((item) => item.id !== id));
     } catch (error) {
       console.error("Error deleting item:", error);
