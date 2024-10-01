@@ -13,7 +13,9 @@ const Add = () => {
   const [productTotal, setProductTotal] = useState(0);
   const [currency, setCurrency] = useState("NGN");
   const [currencySymbol, setCurrencySymbol] = useState("₦");
-  const [totalBudget, setTotalBudget] = useState(8000); // Initial total budget state
+  const [totalBudget, setTotalBudget] = useState(8000);
+  const [message, setMessage] = useState(""); // State for the message
+  const [showMessage, setShowMessage] = useState(false); // State to control message visibility
 
   useEffect(() => {
     fetchItems();
@@ -46,12 +48,17 @@ const Add = () => {
         }))
       );
     } catch (error) {
+      setMessage("Error fetching items."); // Set error message
       console.error("Error fetching items:", error);
     }
   };
 
   const handleAddItem = async () => {
-    if (!item || !quantity || !price) return;
+    if (!item || !quantity || !price) {
+      setMessage("Please fill in all fields."); // Set warning message
+      showMessageWithDelay(); // Show message
+      return;
+    }
 
     const newItem = {
       name: item,
@@ -72,7 +79,10 @@ const Add = () => {
       const data = await response.json();
       setMarketList([...marketList, { ...newItem, id: data.id }]);
       resetInputFields();
+      setMessage("Item added successfully!"); // Set success message
+      showMessageWithDelay(); // Show message
     } catch (error) {
+      setMessage("Error adding item."); // Set error message
       console.error("Error adding item:", error);
     }
   };
@@ -86,10 +96,20 @@ const Add = () => {
         throw new Error(`Error deleting item: ${response.statusText}`);
       }
       setMarketList(marketList.filter((item) => item.id !== id));
+      setMessage("Item deleted successfully!"); // Set success message
+      showMessageWithDelay(); // Show message
     } catch (error) {
+      setMessage("Error deleting item."); // Set error message
       console.error("Error deleting item:", error);
     }
   };
+
+const showMessageWithDelay = () => {
+  setShowMessage(true);
+  setTimeout(() => {
+    setShowMessage(false);
+  }, 3000); // Message will disappear after 3 seconds
+};
 
   const resetInputFields = () => {
     setItem("");
@@ -126,16 +146,18 @@ const Add = () => {
     setTotalBudget(e.target.value);
   };
 
-  
-
   return (
     <div className="container">
+      {showMessage && (
+        <div className={`notification ${showMessage ? "show" : ""}`}>
+          {message} {/* Display message here */}
+        </div>
+      )}
       <h1>BudgetBuddy</h1>
       <h3>YOUR DIGITAL MARKET LIST</h3>
-
       <div className="details-container">
         <div className="headings">
-          <h4>TotalBudget</h4>
+          <h4>Total Budget</h4>
           <h4>Expenses</h4>
           <h4>Balance</h4>
         </div>
@@ -149,7 +171,6 @@ const Add = () => {
           />
           <p id="expenses">{currencySymbol + calculateTotal().toFixed(2)}</p>
           <p>
-            {" "}
             {currencySymbol}
             {totalBudget - calculateTotal()}
           </p>
